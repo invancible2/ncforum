@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: 'OpenSans';
+        src: url('../fonts/OpenSans-Regular.ttf');
+    }
+    @font-face {
+        font-family: 'OpenSansMedium';
+        src: url('../fonts/OpenSans-Medium.ttf');
+    }
+    @font-face {
+        font-family: 'OpenSansBold';
+        src: url('../fonts/OpenSans-Bold.ttf');
+    }
+    @font-face {
+        font-family: 'SourceSansPro';
+        src: url('../fonts/SourceSansPro-Black.ttf');
+    }
+
+    html {
+        font-family: 'OpenSans';
+    }
+}

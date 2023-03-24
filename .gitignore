@@ -7,3 +7,5 @@ venv
 *.pot
 *.pyc
 __pycache__
+
+TODO.txt
