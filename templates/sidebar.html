@@ -1,0 +1,50 @@
+{% load static %}
+
+<aside class="w-18p bg-primary h-screen fixed">
+  <div class="text-center text-white py-4">
+      <h1 class="font-black text-3xl font-sourceSansPro">
+          <a href="{% url 'index' %}">NCForum</a> 
+      </h1>
+  </div>
+  <ul class="mt-3">
+      <li class="mb-2">
+          <a href="{% url 'index' %}" class="flex items-center px-4 py-2 text-white hover:text-primary hover:bg-secondary font-openSansBold">
+          <i class="fa-solid fa-clone mr-2 text-xl"></i>
+          Posts
+          </a>
+      </li>
+  </ul>
+
+  <div class="border-t border-background mx-3 my-3"></div>
+  
+  {% comment %} {% if user.is_authenticated %} {% endcomment %}
+    {% comment %} <div class="w-full">
+        <div class="flex items-center justify-center p-4">
+            <img src="{% static 'images/placeholder.jpeg' %}" alt="Avatar" class="w-10 h-10 rounded-full mr-2">
+            <div class="flex-1">
+                <div class="font-bold text-white"><a href="">Full Name</a></div>
+                <div class="text-gray-200 text-xs">username</div>
+            </div>
+
+            <a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket ml-4 text-bold text-red-400"></i></a>
+        </div>
+    </div> {% endcomment %}
+
+    {% comment %} {% else %} {% endcomment %}
+    <div class="mx-3 w-full">
+
+        <a href="">
+            <div class="w-90p my-1 py-1 rounded-md bg-background text-black focus:outline-none focus:ring-2 text-center focus:ring-blue-500 focus:ring-opacity-50 font-openSansMedium">
+                Signup
+            </div> 
+        </a>
+        <div class="my-2"></div>
+        <a href="">
+            <div class="w-90p my-1 py-1 rounded-md bg-tertiary text-black focus:outline-none focus:ring-2 text-center focus:ring-blue-500 focus:ring-opacity-50 font-openSansMedium">
+                Login
+            </div> 
+        </a>
+    </div>
+  {% comment %} {% endif %} {% endcomment %}
+  
+</aside>

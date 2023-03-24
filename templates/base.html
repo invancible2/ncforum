@@ -1,0 +1,29 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NCForum</title>
+
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}" />
+    {% block css_file %}{% endblock %}
+
+  </head>
+
+  <body class="bg-background">
+    <!-- Sidebar -->
+    {% include 'sidebar.html' %}
+    <!-- Main content -->
+    <main class="flex">
+      <!-- I put this div below to occupy the space of sidebar -->
+      <div class="w-18p"></div>
+      {% block content %}{% endblock %}
+    </main>
+  </body>
+</html>
+
+<script src="{% static 'js/fontawesome.min.js' %}" crossorigin="anonymous"></script>
+{% block js_file %}{% endblock %}
