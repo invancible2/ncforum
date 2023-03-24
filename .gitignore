@@ -1,0 +1,9 @@
+node_modules/
+*.sqlite3
+.env
+venv
+
+*.log
+*.pot
+*.pyc
+__pycache__
