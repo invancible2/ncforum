@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<main class="w-full flex flex-2">
+    <div class="w-70p">
+        {% include 'core/includes/posts.html' %}
+    </div>
+    
+    <!-- Comments -->
+    <div class="w-30p h-screen bg-white shadow-lg rounded-lg overflow-hidden">
+        <div class="p-6">
+        <h3 class="text-lg font-openSansBold mb-4">Comments</h3>
+        
+        <!-- Comment -->
+        {% for comment in comments  %}
+            <div class="flex items-start mb-4">
+            <img class="h-10 w-10 mr-2 rounded-full object-cover" src="{% static 'images/placeholder.jpeg' %}" alt="User image">
+            <div class="flex-grow">
+                <h4 class="font-openSansMedium text-gray-800">user</h4>
+                <p class="text-gray-600 text-sm">
+                {{ comment.content }}
+                </p>
+            </div>
+            </div>
+        {% endfor %}
+
+        <!-- Add Comment Form -->
+        <form class="flex items-start" method="POST">
+            {% csrf_token %}
+            <img class="h-10 w-10 mr-2 rounded-full object-cover" src="{% static 'images/placeholder.jpeg' %}" alt="User image">
+            <div class="flex-grow">
+                {% render_field form.content placeholder="Add Comment..." class="w-full rounded-lg border border-slate-800 focus:outline-slate-900 px-2 py-1"%}
+                <button type="submit" class="bg-primary text-white py-1 px-2 rounded-full mt-2 font-openSansBold float-right">Comment</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</main>
+
+{% endblock content %}

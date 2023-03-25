@@ -64,7 +64,7 @@
               </h3>
             </div>
             <div>
-              <a href="" class="text-gray-700 text-lg">
+              <a href="{% url 'post-detail' post.id %}" class="text-gray-700 text-lg">
                 <i class="fa-regular fa-comment"></i>
                 {{ post.comments.count }}
               </a>
