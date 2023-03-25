@@ -3,6 +3,7 @@ module.exports = {
   content: [
     "./templates/*.html",
     "./core/templates/core/*.html",
+    "./core/templates/core/includes/*.html",
     "./userauth/templates/userauth/*.html",
   ],
   theme: {

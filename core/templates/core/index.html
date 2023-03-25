@@ -1,1 +1,21 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block css_file %}
+{% endblock css_file %}
+
+{% block content %}
+<main class="w-full flex flex-1 justify-center">
+    <div class="w-3/4">
+        {% include 'core/includes/search-bar.html' %}
+        <div class="py-1"></div>
+        {% for post in posts %}
+            {% include 'core/includes/posts.html' %}
+        {% endfor %}
+    </div>
+    
+</main>
+{% endblock content %}
+
+{% block js_file %}
+{% endblock js_file %}
