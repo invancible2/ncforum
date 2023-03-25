@@ -605,12 +605,44 @@ html {
   margin-top: 1.75rem;
 }
 
+.ml-10 {
+  margin-left: 2.5rem;
+}
+
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
+.ml-5 {
+  margin-left: 1.25rem;
+}
+
+.mt-12 {
+  margin-top: 3rem;
+}
+
+.mt-14 {
+  margin-top: 3.5rem;
+}
+
+.mt-32 {
+  margin-top: 8rem;
+}
+
+.mt-9 {
+  margin-top: 2.25rem;
+}
+
 .block {
   display: block;
 }
 
 .flex {
   display: flex;
+}
+
+.inline-flex {
+  display: inline-flex;
 }
 
 .h-10 {
@@ -649,6 +681,10 @@ html {
   width: 75%;
 }
 
+.w-80 {
+  width: 20rem;
+}
+
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -667,6 +703,10 @@ html {
 
 .justify-between {
   justify-content: space-between;
+}
+
+.justify-evenly {
+  justify-content: space-evenly;
 }
 
 .space-x-2 > :not([hidden]) ~ :not([hidden]) {
@@ -693,6 +733,14 @@ html {
   border-radius: 0.75rem;
 }
 
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.border {
+  border-width: 1px;
+}
+
 .border-t {
   border-top-width: 1px;
 }
@@ -700,6 +748,11 @@ html {
 .border-background {
   --tw-border-opacity: 1;
   border-color: rgb(235 235 235 / var(--tw-border-opacity));
+}
+
+.border-slate-900 {
+  --tw-border-opacity: 1;
+  border-color: rgb(15 23 42 / var(--tw-border-opacity));
 }
 
 .bg-background {
@@ -754,12 +807,35 @@ html {
   padding-bottom: 1rem;
 }
 
+.px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.py-10 {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
 .pb-4 {
   padding-bottom: 1rem;
 }
 
 .pl-2 {
   padding-left: 0.5rem;
+}
+
+.pl-4 {
+  padding-left: 1rem;
+}
+
+.pt-2 {
+  padding-top: 0.5rem;
 }
 
 .text-center {

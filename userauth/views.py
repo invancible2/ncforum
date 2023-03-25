@@ -9,6 +9,16 @@ from .forms import CustomUserCreationForm
 class SignupView(CreateView):
     template_name = "userauth/signup.html"
     form_class = CustomUserCreationForm
+    success_url = reverse_lazy('login')
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('/')
+        return super().dispatch(request, *args, **kwargs)
+    
+
+class CustomLoginView(LoginView):
+    template_name = 'userauth/login.html'
     success_url = reverse_lazy('')
 
     def dispatch(self, request, *args, **kwargs):

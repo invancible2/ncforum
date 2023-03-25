@@ -22,7 +22,7 @@
         <div class="flex items-center justify-center p-4">
             <img src="{% static 'images/placeholder.jpeg' %}" alt="Avatar" class="w-10 h-10 rounded-full mr-2">
             <div class="flex-1">
-                <div class="font-bold text-white text-sm"><a href="">{{ user.get_full_name }}</a></div>
+                <div class="font-openSansBold text-white text-sm hover:underline"><a href="">{{ user.get_full_name }}</a></div>
                 <div class="text-gray-200 text-xs">{{ user.username }}</div>
             </div>
 
@@ -39,7 +39,7 @@
             </div> 
         </a>
         <div class="my-2"></div>
-        <a href="">
+        <a href="{% url 'login' %}">
             <div class="w-90p my-1 py-1 rounded-md bg-tertiary text-black focus:outline-none focus:ring-2 text-center focus:ring-blue-500 focus:ring-opacity-50 font-openSansMedium">
                 Login
             </div> 
