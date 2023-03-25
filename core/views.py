@@ -11,7 +11,8 @@ class MainView(ListView):
     
     def get_queryset(self):
         query = self.request.GET.get('q', '')
-        queryset = Post.objects.filter(Q(content__icontains=query)).order_by('-created_at')
+        queryset = Post.objects.filter(Q(content__icontains=query)|
+                                       Q(title__icontains=query)).order_by('-created_at')
 
         return queryset
 

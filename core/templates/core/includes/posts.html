@@ -1,6 +1,6 @@
 {% load static %}
 
-<div class="flex justify-center my-3">
+{% comment %} <div class="flex justify-center my-3">
   <div class="w-80p bg-white shadow-lg rounded-lg overflow-hidden">
     <div class="flex items-center px-6 py-4">
       <img class="h-12 w-12 rounded-full object-cover" src="{% static 'images/placeholder.jpeg' %}" alt="User image">
@@ -30,6 +30,47 @@
         <i class="fa-regular fa-comment"></i>
         Comments
       </a>
+    </div>
+  </div>
+</div> {% endcomment %}
+
+<div class="flex justify-center my-3">
+  <div class="w-80p px-6 py-8 bg-white shadow-lg rounded-lg overflow-hidden">
+    <div class="flex justify-between">
+      <div class="w-5p flex flex-col items-center">
+        <div>
+          <i class="fa-solid fa-arrow-up text-xl text-gray-500"></i>
+        </div>
+        <p class="text-gray-500 py-1 text-lg">0</p>
+        <div>
+          <i class="fa-solid fa-arrow-down text-xl text-gray-500"></i>
+        </div>
+      </div>
+
+      <div class="w-90p">
+        <h1 class="text-2xl font-openSansBold text-gray-800 mb-3">{{ post.title }}</h1>
+        <p class="text-gray-600">{{ post.content }}</p>
+        {% if post.image %}
+          <div class="pt-2 ">
+            <img src="{{ post.image.url }}" class="max-h-96">
+          </div>
+        {% endif %}
+        <hr class="my-6 ">
+          <div class="flex justify-between items-center">
+            <div class="flex items-center">
+              <img class="h-10 w-10 mr-2 rounded-full object-cover" src="{% static 'images/placeholder.jpeg' %}" alt="User image">
+              <h3 class="text-gray-600 font-openSansMedium">
+                Posted by <a href="" class="text-blue-800 hover:underline">{{ post.author.get_full_name }}</a>
+              </h3>
+            </div>
+            <div>
+              <a href="" class="text-gray-700 text-lg">
+                <i class="fa-regular fa-comment"></i>
+                {{ post.comments.count }}
+              </a>
+            </div>
+          </div>
+      </div>
     </div>
   </div>
 </div>
