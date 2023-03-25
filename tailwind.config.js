@@ -2,7 +2,8 @@
 module.exports = {
   content: [
     "./templates/*.html",
-    "./core/templates/core/*.html"
+    "./core/templates/core/*.html",
+    "./userauth/templates/userauth/*.html",
   ],
   theme: {
     fontFamily: {

@@ -17,23 +17,23 @@
 
   <div class="border-t border-background mx-3 my-3"></div>
   
-  {% comment %} {% if user.is_authenticated %} {% endcomment %}
-    {% comment %} <div class="w-full">
+  {% if user.is_authenticated %}
+    <div class="w-full">
         <div class="flex items-center justify-center p-4">
             <img src="{% static 'images/placeholder.jpeg' %}" alt="Avatar" class="w-10 h-10 rounded-full mr-2">
             <div class="flex-1">
-                <div class="font-bold text-white"><a href="">Full Name</a></div>
-                <div class="text-gray-200 text-xs">username</div>
+                <div class="font-bold text-white text-sm"><a href="">{{ user.get_full_name }}</a></div>
+                <div class="text-gray-200 text-xs">{{ user.username }}</div>
             </div>
 
             <a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket ml-4 text-bold text-red-400"></i></a>
         </div>
-    </div> {% endcomment %}
+    </div>
 
-    {% comment %} {% else %} {% endcomment %}
+    {% else %}
     <div class="mx-3 w-full">
 
-        <a href="">
+        <a href="{% url 'signup' %}">
             <div class="w-90p my-1 py-1 rounded-md bg-background text-black focus:outline-none focus:ring-2 text-center focus:ring-blue-500 focus:ring-opacity-50 font-openSansMedium">
                 Signup
             </div> 
@@ -45,6 +45,6 @@
             </div> 
         </a>
     </div>
-  {% comment %} {% endif %} {% endcomment %}
+  {% endif %}
   
 </aside>
