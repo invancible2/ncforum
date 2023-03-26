@@ -1,8 +1,14 @@
+from django.http import Http404
+from django.shortcuts import get_object_or_404
 from django.shortcuts import render, redirect
 from django.db.models import Q
+from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views import View
 from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic.edit import UpdateView, DeleteView
 
-from .forms import CreateCommentForm
+from .forms import CreateCommentForm, CreatePostForm
 from .models import Post
 
 class MainView(ListView):
@@ -12,8 +18,10 @@ class MainView(ListView):
     
     def get_queryset(self):
         query = self.request.GET.get('q', '')
-        queryset = Post.objects.filter(Q(content__icontains=query)|
-                                       Q(title__icontains=query)).order_by('-created_at')
+        queryset = Post.objects.filter(
+                    Q(is_hidden=False) &
+                    (Q(content__icontains=query) | Q(title__icontains=query))
+                    ).order_by('-created_at')
 
         return queryset
 
@@ -40,10 +48,62 @@ class PostDetailView(DetailView):
         post = self.get_object()
         form = CreateCommentForm(post=post, data=request.POST)
         if form.is_valid():
-            form.instance.post = post
-            form.save()
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.post = post
+            comment.save()
             return redirect('post-detail', pk=post.pk)
         else:
             context = self.get_context_data()
             context['form'] = form
             return self.render_to_response(context)
+        
+
+class CreatePostView(View):
+    form_class = CreatePostForm
+    template_name = 'core/create-post.html'
+    success_url = reverse_lazy('index')
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST, request.FILES)
+
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            image = request.FILES.get('image')
+            if image:
+                post.image = image
+            post.save()
+
+            return redirect(self.success_url)
+
+        return render(request, self.template_name, {'form': form})
+
+
+class EditPostView(LoginRequiredMixin, UpdateView):
+    model = Post
+    form_class = CreatePostForm
+    template_name = 'core/update-post.html'
+    success_url = reverse_lazy('index')
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset=queryset)
+        if obj.author != self.request.user:
+            raise Http404
+        return obj
+    
+
+class DeletePostView(LoginRequiredMixin, DeleteView):
+    model = Post
+    template_name = 'core/delete-post.html'
+    success_url = reverse_lazy('index')
+
+    def form_valid(self, form):
+        # Set the is_hidden attribute to True instead of actually deleting the post
+        self.object.is_hidden = True
+        self.object.save()
+        return redirect(self.success_url)

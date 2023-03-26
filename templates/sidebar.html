@@ -13,6 +13,14 @@
           Posts
           </a>
       </li>
+      {% if user.is_authenticated %}
+        <li class="mb-2">
+            <a href="{% url 'create-post' %}" class="flex items-center px-4 py-2 text-white hover:text-primary hover:bg-secondary font-openSansBold">
+            <i class="fa-solid mr-2 fa-circle-plus"></i>
+            Start a topic
+            </a>
+        </li>
+      {% endif %}
   </ul>
 
   <div class="border-t border-background mx-3 my-3"></div>

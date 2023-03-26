@@ -18,7 +18,7 @@
             <div class="flex items-start mb-4">
             <img class="h-10 w-10 mr-2 rounded-full object-cover" src="{% static 'images/placeholder.jpeg' %}" alt="User image">
             <div class="flex-grow">
-                <h4 class="font-openSansMedium text-gray-800">user</h4>
+                <h4 class="font-openSansMedium text-gray-800">{{ comment.author.username }}</h4>
                 <p class="text-gray-600 text-sm">
                 {{ comment.content }}
                 </p>

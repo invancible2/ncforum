@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="w-full h-screen flex flex-1 justify-center items-center">
+    <div class="w-80p px-6 py-8 bg-white shadow-lg rounded-lg overflow-hidden">
+        <h1 class="text-2xl text-gray-800 font-openSansBold">Are you sure you want to delete the post "{{ post.title }}"?</h1>
+        <p class="text-red-600 font-openSansBold italic">This action cannot be undone.</p>
+
+        <div class="flex space-x-2 my-3">
+            <form method="post" action="{% url 'delete-post' post.pk %}">
+                {% csrf_token %}
+                <input type="submit" value="Hide" class="px-3 py-2 bg-red-600 text-white font-openSansMedium cursor-pointer">
+            </form>
+            <a href="{% url 'index' %}" class="px-3 py-2 bg-gray-600 text-white font-openSansMedium">Cancel</a>
+        </div>
+        
+    </div>
+</main>
+  
+{% endblock %}
