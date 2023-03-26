@@ -1,4 +1,5 @@
-from django.http import Http404
+from django.http import Http404, HttpResponse
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render, redirect
 from django.db.models import Q
@@ -9,7 +10,7 @@ from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import UpdateView, DeleteView
 
 from .forms import CreateCommentForm, CreatePostForm
-from .models import Post
+from .models import Post, Vote
 
 class MainView(ListView):
     model = Post
@@ -30,6 +31,44 @@ class MainView(ListView):
         context['page_obj'] = self.get_queryset()
         return context
     
+
+def vote(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    user = request.user
+    print('REACH')
+    
+    if user.is_authenticated:
+        # Check if the user has already voted on this post
+        try:
+            vote = Vote.objects.get(user=user, post=post)
+            if vote.vote_type == request.POST['vote_type']:
+                # User is trying to upvote or downvote the same post again
+                return redirect('index')
+            else:
+                # User is changing their vote from upvote to downvote or vice versa
+                if vote.vote_type == Vote.UPVOTE:
+                    post.upvotes -= 1
+                    post.downvotes += 1
+                else:
+                    post.upvotes += 1
+                    post.downvotes -= 1
+                vote.vote_type = request.POST['vote_type']
+                post.save()
+                vote.save()
+                return redirect('index')
+        except Vote.DoesNotExist:
+            # User has not yet voted on this post
+            vote = Vote(user=user, post=post, vote_type=request.POST['vote_type'])
+            if vote.vote_type == Vote.UPVOTE:
+                post.upvotes += 1
+            else:
+                post.downvotes += 1
+            post.save()
+            vote.save()
+            return redirect('index')
+    else:
+        return redirect('login')
+
 
 class PostDetailView(DetailView):
     model = Post

@@ -10,4 +10,6 @@ urlpatterns = [
     path('<int:pk>/delete/', views.DeletePostView.as_view(), name='delete-post'),
     path('<int:pk>', views.PostDetailView.as_view(), name='post-detail'),
     path('auth/', include('userauth.urls')),
+
+    path('vote/<int:post_id>/', views.vote, name='vote'),
 ]

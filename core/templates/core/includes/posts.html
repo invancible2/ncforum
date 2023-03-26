@@ -5,11 +5,23 @@
     <div class="flex justify-between">
       <div class="w-5p flex flex-col items-center">
         <div>
-          <i class="fa-solid fa-arrow-up text-xl text-gray-500"></i>
+          <form action="{% url 'vote' post.id %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="vote_type" value="U">
+            <button type="submit">
+              <i class="fa-solid fa-arrow-up text-xl text-gray-500"></i>
+            </button>
+          </form>
         </div>
-        <p class="text-gray-500 py-1 text-lg">0</p>
+        <p class="text-gray-500 py-1 text-lg">{{ post.score }}</p>
         <div>
-          <i class="fa-solid fa-arrow-down text-xl text-gray-500"></i>
+          <form action="{% url 'vote' post.id %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="vote_type" value="D">
+            <button type="submit">
+              <i class="fa-solid fa-arrow-down text-xl text-gray-500"></i>
+            </button>
+          </form>
         </div>
       </div>
 
