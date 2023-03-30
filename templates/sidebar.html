@@ -28,9 +28,13 @@
   {% if user.is_authenticated %}
     <div class="w-full">
         <div class="flex items-center justify-center p-4">
+            {% if user.avatar %}
+            <img src="{{ user.avatar.url }}" alt="Avatar" class="w-10 h-10 rounded-full mr-2">
+            {% else %}
             <img src="{% static 'images/placeholder.jpeg' %}" alt="Avatar" class="w-10 h-10 rounded-full mr-2">
+            {% endif %}
             <div class="flex-1">
-                <div class="font-openSansBold text-white text-sm hover:underline"><a href="">{{ user.get_full_name }}</a></div>
+                <div class="font-openSansBold text-white text-sm hover:underline"><a href="{% url 'profile' user.id %}">{{ user.get_full_name }}</a></div>
                 <div class="text-gray-200 text-xs">{{ user.username }}</div>
             </div>
 

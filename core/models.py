@@ -40,8 +40,8 @@ class Vote(models.Model):
   class Meta:
       unique_together = ('user', 'post')
 
-  def __str__(self):
-      return f'{self.user} voted {self.value} on {self.post}'
+  # def __str__(self):
+      # return f'{self.user} voted {self.value} on {self.post}'
     
 
 class Comment(models.Model):

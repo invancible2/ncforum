@@ -48,9 +48,13 @@
         <hr class="my-6 ">
           <div class="flex justify-between items-center">
             <div class="flex items-center">
-              <img class="h-10 w-10 mr-2 rounded-full object-cover" src="{% static 'images/placeholder.jpeg' %}" alt="User image">
+              {% if post.author.avatar %}
+              <img src="{{ post.author.avatar.url }}" alt="Avatar" class="w-10 h-10 rounded-full mr-2">
+              {% else %}
+              <img src="{% static 'images/placeholder.jpeg' %}" alt="Avatar" class="w-10 h-10 rounded-full mr-2">
+              {% endif %}
               <h3 class="text-gray-600 font-openSansMedium">
-                Posted by <a href="" class="text-blue-800 hover:underline">{{ post.author.get_full_name }}</a>
+                Posted by <a href="{% url 'profile' post.author.id %}" class="text-blue-800 hover:underline">{{ post.author.get_full_name }}</a>
               </h3>
             </div>
             <div>

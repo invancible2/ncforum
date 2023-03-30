@@ -1,4 +1,4 @@
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render, redirect
@@ -11,6 +11,7 @@ from django.views.generic.edit import UpdateView, DeleteView
 
 from .forms import CreateCommentForm, CreatePostForm
 from .models import Post, Vote
+from userauth.models import User
 
 class MainView(ListView):
     model = Post
@@ -29,6 +30,7 @@ class MainView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['page_obj'] = self.get_queryset()
+        # context['scores'] = [post.score for post in context['posts']]
         return context
     
 
@@ -43,6 +45,11 @@ def vote(request, post_id):
             vote = Vote.objects.get(user=user, post=post)
             if vote.vote_type == request.POST['vote_type']:
                 # User is trying to upvote or downvote the same post again
+                # if vote.vote_type == Vote.UPVOTE:
+                #     post.upvotes -= 1
+                # else:
+                #     post.downvotes -= 1
+                # vote.delete()
                 return redirect('index')
             else:
                 # User is changing their vote from upvote to downvote or vice versa
@@ -53,8 +60,8 @@ def vote(request, post_id):
                     post.upvotes += 1
                     post.downvotes -= 1
                 vote.vote_type = request.POST['vote_type']
-                post.save()
                 vote.save()
+                post.save()
                 return redirect('index')
         except Vote.DoesNotExist:
             # User has not yet voted on this post
@@ -63,8 +70,8 @@ def vote(request, post_id):
                 post.upvotes += 1
             else:
                 post.downvotes += 1
-            post.save()
             vote.save()
+            post.save()
             return redirect('index')
     else:
         return redirect('login')
@@ -78,6 +85,7 @@ class PostDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         post = self.get_object()
+        # context['scores'] = [post.score for post in context['posts']]
         comments = post.comments.all()
         context['comments'] = comments
         context['form'] = CreateCommentForm(post=post)
@@ -146,3 +154,12 @@ class DeletePostView(LoginRequiredMixin, DeleteView):
         self.object.is_hidden = True
         self.object.save()
         return redirect(self.success_url)
+
+class ProfileView(LoginRequiredMixin, DetailView):
+    model = User
+    template_name = 'core/profile.html'
+    context_object_name = 'user_profile'
+
+    def get_object(self, queryset=None):
+        user_id = self.kwargs['pk']
+        return User.objects.get(id=user_id)

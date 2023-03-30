@@ -16,7 +16,11 @@
         <!-- Comment -->
         {% for comment in comments  %}
             <div class="flex items-start mb-4">
-            <img class="h-10 w-10 mr-2 rounded-full object-cover" src="{% static 'images/placeholder.jpeg' %}" alt="User image">
+                {% if comment.author.avatar %}
+                <img src="{{ comment.author.avatar.url }}" alt="Avatar" class="w-10 h-10 rounded-full mr-2">
+                {% else %}
+                <img src="{% static 'images/placeholder.jpeg' %}" alt="Avatar" class="w-10 h-10 rounded-full mr-2">
+                {% endif %}
             <div class="flex-grow">
                 <h4 class="font-openSansMedium text-gray-800">{{ comment.author.username }}</h4>
                 <p class="text-gray-600 text-sm">

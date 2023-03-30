@@ -11,5 +11,13 @@ urlpatterns = [
     path('<int:pk>', views.PostDetailView.as_view(), name='post-detail'),
     path('auth/', include('userauth.urls')),
 
+    
+
+    path('profile/<int:pk>', views.ProfileView.as_view(), name='profile'),
+]
+
+ajaxpatterns = [
     path('vote/<int:post_id>/', views.vote, name='vote'),
 ]
+    
+urlpatterns += ajaxpatterns

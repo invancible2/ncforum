@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="w-82p bg-white h-screen">
+    <div class="p-8">
+        <!-- profile -->
+        <div class="border-b">
+            {% if user_profile.avatar %}
+            <img src="{{ user_profile.avatar.url }}" alt="Profile" class="h-40 w-40 rounded-full border-2 border-black">
+            {% else %}
+            <img src="{% static 'images/placeholder.jpeg' %}" alt="Profile" class="h-40 w-40 rounded-full border-2 border-black">
+            {% endif %}
+        </div>
+        <div class="mt-2 mb-10">
+        <!-- Fullname -->
+            <h4 class="mt-2 font-bold">
+                {{ user_profile.get_full_name }}
+            </h4>
+            <!-- username -->
+            <h5 class="mt-2 font-semibold">
+                @{{ user_profile.username }}
+            </h5>
+            <!-- Bio -->
+            <h6 class="mt-2 font-medium">
+                {{ user_profile.bio }}
+            </h6>
+        </div>
+        <div class="flex justify-center items-center">
+            <!-- Post Card -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden w-9/12">
+                <!-- Content of post Card -->
+                <div class="border border-slate-200">
+                    <div class="px-6 py-4">
+                        <!-- for the profile in post card -->
+                    <div class="flex items-center p-1">
+                        <div class="mb-2"><img src="./Sigma.jpg" alt="" class="h-10 w-10 rounded-full border-2 border-black"></div>
+                        <h4 class="font-bold ml-3">Juan Dela Cruz</h4> 
+                    </div>
+
+                    <!-- If the post has no image, display a placeholder text instead -->
+                    <p class="text-gray-700 text-base">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed volutpat nibh in massa pellentesque, eget pharetra massa fermentum.</p>
+                    </div>
+
+                    <!-- If the post has an image, display it here -->
+                    <div class="py-2">
+                        <img src="./p1.jpg" alt="Post image" class="w-full h-auto">
+                    </div>
+                </div>
+
+                <!-- i copy this post card again for testing the appearance if it have multiple post
+                disregard this div content -->
+                <div class="border border-slate-200">
+                    <div class="px-6 py-4">
+                        <!-- for the profile in post card -->
+                    <div class="flex items-center p-1">
+                        <div class="mb-2"><img src="./Sigma.jpg" alt="" class="h-10 w-10 rounded-full border-2 border-black"></div>
+                        <h4 class="font-bold ml-3">Juan Dela Cruz</h4> 
+                    </div>
+
+                    <!-- If the post has no image, display a placeholder text instead -->
+                    <p class="text-gray-700 text-base">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed volutpat nibh in massa pellentesque, eget pharetra massa fermentum.</p>
+                    </div>
+
+                    <!-- If the post has an image, display it here -->
+                    <!-- <img src="./p1.jpg" alt="Post image" class="w-full h-auto"> -->
+                </div>
+                <!-- end of the repeated post card -->
+
+            </div>            
+        </div>
+    </div>
+</div>
+{% endblock content %}

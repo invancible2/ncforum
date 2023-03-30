@@ -9,7 +9,7 @@
         <div class="flex space-x-2 my-3">
             <form method="post" action="{% url 'delete-post' post.pk %}">
                 {% csrf_token %}
-                <input type="submit" value="Hide" class="px-3 py-2 bg-red-600 text-white font-openSansMedium cursor-pointer">
+                <input type="submit" value="Delete" class="px-3 py-2 bg-red-600 text-white font-openSansMedium cursor-pointer">
             </form>
             <a href="{% url 'index' %}" class="px-3 py-2 bg-gray-600 text-white font-openSansMedium">Cancel</a>
         </div>
